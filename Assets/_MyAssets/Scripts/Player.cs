@@ -6,17 +6,23 @@ public class Player : MonoBehaviour
 {
     //Attributs
     [SerializeField]private float _vitesse = 10;
+    private bool jouer;
 
     // Méthodes privées
     private void Start()
     {
+        jouer = true;
         //Position de départ du joueur
-        this.transform.position = new Vector3(-12f,0.51f,-12f);
+        this.transform.position = new Vector3(-28f,0.51f,-31f);
     }
 
     private void Update()
     {
-        MovementsJoueur();
+        if (jouer)
+        {
+            MovementsJoueur();
+        }
+        
     }
 
     private void MovementsJoueur()
@@ -25,5 +31,14 @@ public class Player : MonoBehaviour
         float positionZ = Input.GetAxis("Vertical");
         Vector3 direction = new Vector3(positionX, 0f, positionZ);
         transform.Translate(direction * Time.deltaTime * _vitesse);
+    }
+
+    public void Arret() 
+    {   
+        jouer = false;
+        if(!jouer) 
+        {
+            Debug.Log("Vous avez terminé");
+        }
     }
 }
