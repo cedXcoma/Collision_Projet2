@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     //Attributs
     [SerializeField]private float _vitesse = 10;
     private bool jouer;
+    private Rigidbody _rb;
 
     // Méthodes privées
     private void Start()
@@ -14,9 +15,10 @@ public class Player : MonoBehaviour
         jouer = true;
         //Position de départ du joueur
         this.transform.position = new Vector3(-28f,0.51f,-31f);
+        _rb = GetComponent<Rigidbody>();   
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (jouer)
         {
@@ -30,7 +32,8 @@ public class Player : MonoBehaviour
         float positionX = Input.GetAxis("Horizontal");
         float positionZ = Input.GetAxis("Vertical");
         Vector3 direction = new Vector3(positionX, 0f, positionZ);
-        transform.Translate(direction * Time.deltaTime * _vitesse);
+        //transform.Translate(direction * Time.deltaTime * _vitesse);
+        _rb.velocity = direction * Time.deltaTime * _vitesse;
     }
 
     public void Arret() 
@@ -39,6 +42,7 @@ public class Player : MonoBehaviour
         if(!jouer) 
         {
             Debug.Log("Vous avez terminé");
+            // OU faire this.gameobject.setActive(false)
         }
     }
 }

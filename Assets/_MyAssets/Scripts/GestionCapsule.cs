@@ -10,8 +10,8 @@ public class GestionCapsule : MonoBehaviour
 
     private void Start()
     {
-        _gestionJeu = FindObjectOfType<GestionJeu>();
         _gestionJoueur = FindObjectOfType<Player>();
+        _gestionJeu = FindObjectOfType<GestionJeu>();
         _toucher = false;
     }
     private void OnCollisionEnter(Collision collision)
@@ -20,8 +20,14 @@ public class GestionCapsule : MonoBehaviour
         {
             if (!_toucher)
             {
+                int erreurs = _gestionJeu.GetPointage();
                 _gestionJoueur.Arret();
                 _toucher = true;
+                Debug.Log("Le temps total est de : " + Time.time + "seconde");
+                Debug.Log("Vous avez accroché " + erreurs + "  obstacles");
+                float total = Time.time + erreurs;
+                Debug.Log("Temps final : " + total);
+                
             }
 
 

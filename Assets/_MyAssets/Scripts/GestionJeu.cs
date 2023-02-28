@@ -29,6 +29,9 @@ public class GestionJeu : MonoBehaviour
         _pointage++;
         Debug.Log("Nombres d'acrochages : " + _pointage);
     }
-
+    public int GetPointage()
+    {
+        return _pointage; 
+    }
 
 }
