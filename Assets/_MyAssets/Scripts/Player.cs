@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     //Attributs
-    [SerializeField]private float _vitesse = 10;
+    [SerializeField]private float _vitesse = 450;
     private bool jouer;
     private Rigidbody _rb;
 
@@ -33,7 +33,9 @@ public class Player : MonoBehaviour
         float positionZ = Input.GetAxis("Vertical");
         Vector3 direction = new Vector3(positionX, 0f, positionZ);
         //transform.Translate(direction * Time.deltaTime * _vitesse);
-        _rb.velocity = direction * Time.deltaTime * _vitesse;
+        _rb.velocity = direction * Time.fixedDeltaTime * _vitesse;
+
+        //_rb.AddForce(direction * Time.fixedDeltaTime * _vitesse); Fait comme un effet de glisse , car on utilise des forces pour se mouvoir donc pour arreter faut envoyer plus de force de l'autre coté
     }
 
     public void Arret() 

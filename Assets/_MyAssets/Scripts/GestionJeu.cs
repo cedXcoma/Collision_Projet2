@@ -7,6 +7,21 @@ public class GestionJeu : MonoBehaviour
 
     // Attributs
     private int _pointage;
+    private int _accrochageNiveau1 = 0;
+    private float _tempsNiveau1 = 0.0f;
+
+    private void Awake()
+    {
+        int nbGestionJeu = FindObjectsOfType<GestionJeu>().Length;
+        if (nbGestionJeu > 1)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            DontDestroyOnLoad(gameObject);
+        }
+    }
 
     // Start is called before the first frame update
     private void Start()
@@ -34,4 +49,19 @@ public class GestionJeu : MonoBehaviour
         return _pointage; 
     }
 
+    public float GetTempsNiv1()
+    {
+        return _tempsNiveau1;
+    }
+
+    public int GetAccrochageNiv1()
+    {
+        return _accrochageNiveau1;
+    }
+
+    public void SetNiveau1(int accrochages, float tempsNiv1)
+    {
+        _accrochageNiveau1 = accrochages;
+        _tempsNiveau1 = tempsNiv1;
+    }
 }
